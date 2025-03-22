@@ -1,0 +1,128 @@
+#!meta
+
+{"kernelInfo":{"defaultKernelName":null,"items":[{"name":"csharp","languageName":"C#","aliases":["c#","cs"]},{"name":"fsharp","languageName":"F#","aliases":["f#","fs"]},{"name":"pwsh","languageName":"PowerShell","aliases":["powershell"]},{"name":"javascript","languageName":"JavaScript","aliases":["js"]},{"name":"html","languageName":"HTML"},{"name":"sql","languageName":"SQL"},{"name":"kql","languageName":"KQL"},{"name":"mermaid","languageName":"Mermaid"},{"name":"http","languageName":"HTTP"},{"name":"value"}]}}
+
+#!markdown
+
+# Get Started
+
+This notebook will guide you through the first steps of using the PSFramework module.
+
+## Prerequisites
+
+To make full use of this notebook, open it in Visual Studio Code with the PowerShell and Polyglot extensions installed.
+
+To use the PSFramework PowerShell module, version 3.0 of PowerShell needs to be installed as well.
+
+## Installation
+
+The PSFramework module can be installed from the PowerShell Gallery. To do so, run the following PowerShell command:
+
+#!pwsh
+
+Install-Module PSFramework
+
+#!markdown
+
+### Installation prompts
+
+Either way, the installation may prompt you for questions / confirmations about core PowerShell configurations. You need to either accept or approve all the prompts for the module to work correctly. The prompts usually require you to enter "y" (for yes) or "a" (for "yes to all").
+
+#!markdown
+
+## Importing the module
+
+Once the module is installed, it can be imported into the current PowerShell session. To do so, run the following command.
+
+#!pwsh
+
+Import-Module PSFramework
+
+#!markdown
+
+## Using the module
+
+The PSFramework module includes several areas of functionality, among them
+- Advanced message & logging functionality
+- Manage scripts & modules using DSC
+- Simple Tab Completion
+- Runspace-safe development
+- PowerShell Scheduled tasks
+
+As part of this notebook on getting started, we will only take a quick look into the first area around logging. Other notebooks may cover this area and the others in more detail.
+
+### A quick peek into logging
+
+With PSFramework, you have the powerful `Write-PSFMessage` command available. This gives you advanced messaging and logging capabilities.
+
+Instead of
+
+#!pwsh
+
+Write-Verbose "logging something"
+
+#!markdown
+
+you can now use
+
+#!pwsh
+
+Write-PSFMessage "logging something"
+
+#!markdown
+
+Both commands write the message to verbose. However, `Write-PSFMessage` also writes to a log file. In addition, once a log file gets too old or too large, it is automatically cleaned up.
+
+To find the folder where the log files are placed, you can use `Get-PSFConfigValue` command (don't worry about the `psframework.logging.filesystem.logpath` for now; this will be explained in another place):
+
+#!pwsh
+
+Get-PSFConfigValue -FullName psframework.logging.filesystem.logpath
+
+#!markdown
+
+Combined with the standard [Get-ChildItem](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-childitem) command, you can use it to list the log files in the folder:
+
+#!pwsh
+
+Get-PSFConfigValue -FullName psframework.logging.filesystem.logpath | Get-ChildItem
+
+#!markdown
+
+You could now use [Get-Content](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-content) to inspect the log files. PSFramework however has the dedicated `Get-PSFMessage` command for that.
+
+#!pwsh
+
+Get-PSFMessage
+
+#!markdown
+
+If you are wondering what other logging capabilities PSFramework provides, take a look at the [logging system documentation](https://psframework.org/documentation/documents/psframework/logging.html). Other notebooks may cover these capabilities as well.
+
+#!markdown
+
+## Learn more about the module
+
+Now that you know how to install, configure and run a simple command of the module, it is time to learn how you can learn more about the module.
+Not every command will have a notebook like this to explain it. However, each command has documentation that can help you learn how to use it.
+To view the documentation for the `Write-PSFMessage` command, run the following [Get-Help](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/get-help) command:
+
+#!pwsh
+
+Get-Help Write-PSFMessage
+
+#!markdown
+
+As the `REMARKS` section at the end says, you can add some switches to the `Get-Help` command to get additional information. One of the most useful is the `-Examples` switch that shows you how the command can be used for different scenarios.
+
+#!pwsh
+
+Get-Help Write-PSFMessage -Examples
+
+#!markdown
+
+# Next steps
+
+Now that you have successfully run your first cmdlet, you can continue with other notebooks in this folder to learn more about the PSFramework module and how to use it.
+
+Take a look at [Learn commands](Learn-Commands.ipynb) to get an introduction to other cmdlets of the module.
