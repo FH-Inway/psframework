@@ -1,0 +1,11 @@
+on: [pull_request]
+
+jobs:
+  validate:
+    uses: fh-inway/d365.psmodule-alm/.github/workflows/tmpl-build-release.yml@main
+    with:
+      module: 'psframework'
+      skippublish: $True
+      skipghrelease: true
+    secrets:
+      apikey: 'not used'
